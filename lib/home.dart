@@ -28,8 +28,8 @@ class Login extends StatelessWidget {
                   ),
                   SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 20),
+                      padding:
+                          const EdgeInsets.only(left: 20.0, right: 20, top: 30),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -40,19 +40,16 @@ class Login extends StatelessWidget {
                               style: TextStyle(
                                   color: white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30),
+                                  fontSize: 28),
                             ),
                           ),
                           Spacer(),
                           CircleAvatar(
-                            backgroundColor: white,
-                            radius: 30,
-                            child: SvgPicture.asset(
-                              "Asset/user.svg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.cover,
-                              allowDrawingOutsideViewBox: true,
+                            maxRadius: deviceSize.width * 0.11,
+                            child: Image.asset(
+                              'Asset/user.png',
+                              fit: BoxFit.fitHeight,
+                              height: 200,
                             ),
                           ),
                         ],
@@ -111,29 +108,67 @@ class TapBox extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (build, context) {
-              return boxes(deviceSize: deviceSize);
+        TileRow(
+          child1: Tile(
+            deviceSize: deviceSize,
+            title: "Bed Room",
+            bulb: 4,
+            img: 'Asset/1.png',
+            onTap: () {
+              print("object");
             },
-            itemCount: 4,
-            padding: EdgeInsets.symmetric(
-              vertical: 20,
-            ),
+          ),
+          child2: Tile(
+            deviceSize: deviceSize,
+            title: "Living Room",
+            bulb: 2,
+            img: 'Asset/1r.png',
+            onTap: () {},
           ),
         ),
+        TileRow(
+          child1: Tile(
+            deviceSize: deviceSize,
+            title: "Kitchen",
+            bulb: 5,
+            img: 'Asset/2.png',
+            onTap: () {},
+          ),
+          child2: Tile(
+            deviceSize: deviceSize,
+            title: "Bathroom",
+            bulb: 1,
+            img: 'Asset/2r.png',
+            onTap: () {},
+          ),
+        ),
+        TileRow(
+          child1: Tile(
+            deviceSize: deviceSize,
+            title: "Outdoor",
+            bulb: 5,
+            img: 'Asset/3.png',
+            onTap: () {},
+          ),
+          child2: Tile(
+            deviceSize: deviceSize,
+            title: "Balcony",
+            bulb: 2,
+            img: 'Asset/3r.png',
+            onTap: () {},
+          ),
+        )
       ],
     );
   }
 }
 
-class boxes extends StatelessWidget {
-  const boxes({
-    Key? key,
-    required this.deviceSize,
-  }) : super(key: key);
+class TileRow extends StatelessWidget {
+  const TileRow({Key? key, required this.child1, required this.child2})
+      : super(key: key);
 
-  final Size deviceSize;
+  final Widget child1;
+  final Widget child2;
 
   @override
   Widget build(BuildContext context) {
@@ -144,38 +179,82 @@ class boxes extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: deviceSize.width * 0.42,
-            height: deviceSize.width * 0.42,
-            decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    spreadRadius: 10,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ]),
-          ),
+          child1,
           Spacer(),
-          Container(
-            width: deviceSize.width * 0.42,
-            height: deviceSize.width * 0.42,
-            decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    spreadRadius: 10,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ]),
-          ),
+          child2,
         ],
+      ),
+    );
+  }
+}
+
+class Tile extends StatelessWidget {
+  const Tile({
+    Key? key,
+    required this.deviceSize,
+    required this.title,
+    required this.bulb,
+    required this.onTap,
+    required this.img,
+  }) : super(key: key);
+
+  final Size deviceSize;
+  final String title;
+  final int bulb;
+  final VoidCallback onTap;
+  final String img;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: deviceSize.width * 0.42,
+        height: deviceSize.width * 0.42,
+        decoration: BoxDecoration(
+            color: white,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                spreadRadius: 10,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ]),
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: deviceSize.width * 0.06,
+              left: deviceSize.width * 0.06,
+              right: 10,
+              bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: deviceSize.width * 0.13,
+                child: Image.asset(img),
+              ),
+              Spacer(),
+              Text(
+                title,
+                style: TextStyle(
+                  color: tileFontBlack,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              Text(
+                "$bulb Lights",
+                style: TextStyle(
+                  color: tileFontOrange,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
