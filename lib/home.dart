@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sample_app/Model/constant.dart';
+import 'package:sample_app/view/room.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -100,8 +102,8 @@ class TapBox extends StatelessWidget {
             "All Rooms",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 22,
-              color: bgColor,
+              fontSize: 20,
+              color: blueText,
             ),
           ),
         ),
@@ -110,14 +112,13 @@ class TapBox extends StatelessWidget {
         ),
         TileRow(
           child1: Tile(
-            deviceSize: deviceSize,
-            title: "Bed Room",
-            bulb: 4,
-            img: 'Asset/1.png',
-            onTap: () {
-              print("object");
-            },
-          ),
+              deviceSize: deviceSize,
+              title: "Bed Room",
+              bulb: 4,
+              img: 'Asset/1.png',
+              onTap: () {
+                Get.to(() => LightDescription(), transition: Transition.zoom);
+              }),
           child2: Tile(
             deviceSize: deviceSize,
             title: "Living Room",
