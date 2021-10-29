@@ -11,70 +11,100 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'Asset/bulb.svg',
+              height: 20,
+            ),
+            title: Text(''),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'Asset/Icon feather-home.svg',
+              height: 20,
+            ),
+            title: Text(''),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'Asset/Icon feather-settings.svg',
+              height: 20,
+            ),
+            title: Text(''),
+          ),
+        ],
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: bgColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    height: deviceSize.height * 0.25,
-                    width: deviceSize.width,
-                    child: SvgPicture.asset(
-                      "Asset/Circles.svg",
-                      fit: BoxFit.cover,
-                      allowDrawingOutsideViewBox: true,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20.0, right: 20, top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: deviceSize.width * 0.4,
-                            child: Text(
-                              "Control Panel",
-                              style: TextStyle(
-                                  color: white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 28),
-                            ),
-                          ),
-                          Spacer(),
-                          CircleAvatar(
-                            maxRadius: deviceSize.width * 0.11,
-                            child: Image.asset(
-                              'Asset/user.png',
-                              fit: BoxFit.fitHeight,
-                              height: 200,
-                            ),
-                          ),
-                        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: deviceSize.height * 0.25,
+                      width: deviceSize.width,
+                      child: SvgPicture.asset(
+                        "Asset/Circles.svg",
+                        fit: BoxFit.cover,
+                        allowDrawingOutsideViewBox: true,
                       ),
                     ),
-                  )
-                ],
-              ),
-            ],
-          ),
-          Container(
-            height: deviceSize.height * 0.75,
-            width: deviceSize.width,
-            decoration: BoxDecoration(
-              color: offWhite,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20, top: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: deviceSize.width * 0.4,
+                              child: Text(
+                                "Control Panel",
+                                style: TextStyle(
+                                    color: white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 28),
+                              ),
+                            ),
+                            Spacer(),
+                            CircleAvatar(
+                              maxRadius: deviceSize.width * 0.11,
+                              child: Image.asset(
+                                'Asset/user.png',
+                                fit: BoxFit.fitHeight,
+                                height: 200,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            child: TapBox(),
-          )
-        ],
+            Container(
+              height: deviceSize.height * 0.75,
+              width: deviceSize.width,
+              decoration: BoxDecoration(
+                color: offWhite,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
+              ),
+              child: TapBox(),
+            )
+          ],
+        ),
       ),
     );
   }
